@@ -613,13 +613,9 @@
   <h2 style="font-family:Georgia,serif;font-size:clamp(28px,4vw,52px);color:white;line-height:1.1;margin-bottom:16px;font-weight:normal;">Watch Our Free Information Session</h2>
   <p style="font-family:'Trebuchet MS',sans-serif;font-size:17px;color:rgba(255,255,255,0.85);max-width:520px;margin:0 auto 40px;line-height:1.7;">Fill in your details below and we will send you instant access to our Travel Business Information Call. No obligation. No pressure. Just honest information.</p>
 
-  <form action="https://formspree.io/f/xkoyljwp" method="POST" style="max-width:480px;margin:0 auto;">
+  <form id="leadForm" style="max-width:480px;margin:0 auto;">
     
-    <!-- Send confirmation email to the person -->
-    <input type="hidden" name="_replyto" value="">
-    <input type="hidden" name="_subject" value="Your Made To Travel Information Session Access">
-    <input type="hidden" name="_autoresponse" value="Hi there, thank you for your interest in Made To Travel. Here is your access to our Travel Business Information Call. Recording link: https://us06web.zoom.us/rec/share/HyDLpKqA7iDmTlOxDzCBG75G-Upk8wPVUpSqnt9f20KjCok2eXHvQXtSVGGAZvSU.TmfiCbzo3kAz7tyE?startTime=1774026964000 Passcode: 3^UEj&V4 We will be in touch personally within 24 hours. Kevin and Sam, Made To Travel. Instagram: @madetotravel_kevin">
-    <input type="hidden" name="_next" value="https://madetotravel.github.io/madetotravel/thank-you.html">
+
     
     <div style="margin-bottom:16px;">
       <input type="text" name="name" placeholder="Your Name" required
@@ -640,10 +636,26 @@
     <input type="hidden" name="page" value="Dundee Mums">
     <input type="hidden" name="_gotcha" style="display:none">
 
-    <button type="submit"
+    <button type="button" onclick="submitLead()"
       style="width:100%;background:#2a9d8f;color:white;border:none;padding:20px;font-family:'Trebuchet MS',sans-serif;font-size:16px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;cursor:pointer;">
       Send Me Instant Access
     </button>
+    <script>
+    function submitLead() {
+      var n = document.querySelector('#leadForm [name="name"]').value.trim();
+      var e = document.querySelector('#leadForm [name="email"]').value.trim();
+      var p = document.querySelector('#leadForm [name="phone"]').value.trim();
+      if (!n || !e || !p) { alert('Please fill in all fields.'); return; }
+      var fd = new FormData();
+      fd.append('name', n);
+      fd.append('email', e);
+      fd.append('phone', p);
+      fd.append('page', 'Dundee Mums');
+      fd.append('_subject', 'New Made To Travel Lead - Dundee Mums');
+      fetch('https://formspree.io/f/xkoyljwp', { method:'POST', body:fd, headers:{'Accept':'application/json'} });
+      window.location.href = 'https://madetotravel.github.io/madetotravel/thank-you.html';
+    }
+    </script>
 
     <p style="font-family:'Trebuchet MS',sans-serif;font-size:12px;color:rgba(255,255,255,0.4);margin-top:16px;line-height:1.6;">
       We respect your privacy. Your details will never be shared with third parties.<br>
