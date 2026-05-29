@@ -266,7 +266,7 @@ img{display:block;width:100%;}
   <!-- THANK YOU (shown after submit) -->
   <div class="thanks" id="thankYou">
     <h3>🎉 You're All Set!</h3>
-    <p>Thanks! Kevin &amp; Sam will be in touch shortly with your link to the 20 minute overview.<br><br>Questions? WhatsApp us anytime on <strong style="color:#FFE135;">07709 447263</strong></p>
+    <p>Taking you to the video now...<br><br>If you are not redirected automatically, <a href="https://madetotravel.github.io/madetotravel/video.html" style="color:#FFE135;">click here to watch</a></p>
   </div>
 </div>
 
@@ -285,11 +285,13 @@ function submitForm() {
   var email = document.getElementById('femail').value;
   var phone = document.getElementById('fphone').value;
   if (!name || !email || !phone) { alert('Please fill in all fields'); return; }
-  // Send via WhatsApp so Kevin gets notified
+  // Notify Kevin via WhatsApp
   var msg = 'New video request!%0AName: ' + encodeURIComponent(name) + '%0AEmail: ' + encodeURIComponent(email) + '%0APhone: ' + encodeURIComponent(phone);
   window.open('https://wa.me/447709447263?text=' + msg, '_blank');
-  document.getElementById('videoForm').style.display = 'none';
-  document.getElementById('thankYou').style.display = 'block';
+  // Redirect to video page automatically
+  setTimeout(function() {
+    window.location.href = 'https://madetotravel.github.io/madetotravel/video.html';
+  }, 800);
 }
 </script>
 </body>
